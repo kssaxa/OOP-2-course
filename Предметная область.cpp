@@ -45,9 +45,7 @@ public:
 
     void print()
     {
-        //char star = '-';
-        //int num = 30;
-        //std::cout << std::string(num, star) << std::endl;
+    
         std::cout << "Range_of_flight       : " << this->Range_of_flight << std::endl;
         std::cout << " Pass_mest       : " << this->Pass_mest << std::endl;
         std::cout << "Takeoff_weight   : " << this->Takeoff_weight << std::endl;
@@ -59,7 +57,6 @@ public:
         std::cout << "Crew_count   : " << this->Crew_count << std::endl;
         std::cout << "Crew : " << this->Crew << std::endl;
 
-       // std::cout << std::string(num, star) << std::endl;
     }
 
     std::string prov()
