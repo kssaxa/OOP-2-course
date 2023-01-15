@@ -62,7 +62,7 @@ public:
        // std::cout << std::string(num, star) << std::endl;
     }
 
-    std::string respect()
+    std::string prov()
     {
         std::string result;
         if (Safety_equipment ==true )
@@ -75,7 +75,7 @@ public:
 
 int main()
 {
-    //std::string resp;
+    
     Characteristics_plane  RU(4, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
     Plane  GM(5, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
     Plane  FR(4, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
