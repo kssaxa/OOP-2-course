@@ -1,4 +1,5 @@
-﻿
+
+
 #include<iostream>
 #include <string>
 class  Characteristics_plane {
@@ -24,9 +25,15 @@ public:
     bool Safety_equipment;//Спасательное оборудование
     bool military_equipment;//Военное оборудование
 
-
-    ///////////Конструктор///////////
-    //Plane() : Characteristics_plane() {};
+    int Range_of_flight;
+    int Pass_mest;
+    int Takeoff_weight; 
+    int Empty_weight; 
+    int Wingspan;
+    std::string model;
+    std::string name;
+    int Crew_count;
+    std::string Crew;
 
     Plane(int Range_of_flight, int Pass_mest, int Takeoff_weight, int Empty_weight,
         int Wingspan, std::string model, std::string name, int Crew_count, std::string Crew)
@@ -45,7 +52,7 @@ public:
 
     void print()
     {
-    
+
         std::cout << "Range_of_flight       : " << this->Range_of_flight << std::endl;
         std::cout << " Pass_mest       : " << this->Pass_mest << std::endl;
         std::cout << "Takeoff_weight   : " << this->Takeoff_weight << std::endl;
@@ -57,9 +64,11 @@ public:
         std::cout << "Crew_count   : " << this->Crew_count << std::endl;
         std::cout << "Crew : " << this->Crew << std::endl;
 
+       
     }
+ 
 
-    std::string prov()
+    std::string prov_Model()
     {
         std::string result;
         if (Safety_equipment ==true )
@@ -68,20 +77,30 @@ public:
             return result = "Пригоден для ВС";
     }
 
+    std::string prov_polet()
+    {
+        std::string result;
+        if (Range_of_flight >= 5000)
+            return result = "Пригоден для дальних перелетов";
+        else
+            return result = "Не пригоден для далних перелетов";
+    }
+
 };
 
 int main()
 {
+  
     
-    Characteristics_plane  RU(4, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
-    Plane  GM(5, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
-    Plane  FR(4, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
-    Plane  CN(4, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
+    Plane RU(4, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
+    Plane GM(5, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
+    Plane FR(4, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
+    Plane CN(0, 8, 80, 87, "Safe", "A-854ds6", 1, "ivanov I.I.");
       
 
-    /*RU.print();
+    RU.print();
     GM.print();
     FR.print();
-    CN.print();*/
+    CN.print();
 
 }
