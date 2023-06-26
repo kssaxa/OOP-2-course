@@ -1,45 +1,6 @@
 ﻿#include "characters.h"
 #include <iostream>
-/*class Strategy {
-public:
-    virtual void execute() = 0;
-};
 
-class AttackStrategy : public Strategy {
-public:
-    void execute() override {
-        // выполнение алгоритма атаки
-    }
-};
-
-class DefenseStrategy : public Strategy {
-public:
-    void execute() override {
-        // выполнение алгоритма защиты
-    }
-};
-class CharacterDecorator : public Character {
-protected:
-    Character* character;
-public:
-    CharacterDecorator(Character* character) : character(character) {}
-};
-
-class SpeedDecorator : public CharacterDecorator {
-public:
-    SpeedDecorator(Character* character) : CharacterDecorator(character) {}
-    void increaseSpeed() {
-        // увеличение скорости передвижения
-    }
-};
-
-class MagicDefenseDecorator : public CharacterDecorator {
-public:
-    MagicDefenseDecorator(Character* character) : CharacterDecorator(character) {}
-    void increaseMagicDefense() {
-        // увеличение магической защиты
-    }
-};*/
 
 
 Character::Character(std::string name, int level, int health, int attack, int defense) {
