@@ -10,10 +10,9 @@ namespace Container
     template<typename T>
     class forward_list_iterator : public std::iterator<
         std::forward_iterator_tag,
-        T, // Value type
-        T*,// Pointer
-        T&> {// Reference
-        // declare the friend to the forward_Qlist
+        T, 
+        T*,
+        T&> {
         friend class forward_list<T>;
 
     public:
