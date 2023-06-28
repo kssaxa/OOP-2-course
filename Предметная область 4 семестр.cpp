@@ -1,18 +1,22 @@
-//﻿#include "characters.h"
+#include "characters.h"
 #include <iostream>
 #include "list.h"
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <functional>
 
 // Базовый класс персонажа
 class Character {
+    std::function<void()> heal;
 protected:
+//private:
     std::string name;
     int level;
     int health;
     int attack;
 
+    
 public:
     Character(std::string name, int level, int health, int attack)
         : name(name), level(level), health(health), attack(attack) {}
@@ -34,6 +38,23 @@ public:
         os << "Атака: " << character.attack << std::endl;
         return os;
     }
+    
+    void setHeal(std::function<void()> healFunc) {
+        heal = healFunc;
+    }
+
+    void performHeal() {
+        if (heal) {
+            heal(); // Вызов лямбда-выражения лечения
+        }
+    }
+
+
+
+
+
+
+
 };
 
 class PlayerCharacter : public Character {
@@ -162,6 +183,14 @@ int main() {
     std::cout << "Обучение для события 'Опасная тропа' " << std::endl;
     for (auto i : invite)
         std::cout << i << std::endl;
+
+
+    Character player("barbara", 100, 20, 10);
+    player.setHeal([]() {
+        std::cout << "Player heals themselves!" << std::endl;
+        });
+
+    player.performHeal(); // Выводит "Player heals themselves!"
 
 
 }
