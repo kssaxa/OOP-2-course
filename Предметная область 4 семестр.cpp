@@ -7,7 +7,7 @@
 #include <functional>
 
 // Базовый класс персонажа
-class Character {
+class Play_Character {
     std::function<void()> heal;
 protected:
 //private:
@@ -18,25 +18,29 @@ protected:
 
     
 public:
-    Character(std::string name, int level, int health, int attack)
+    Play_Character(std::string region,std::string name, int level, int health, int attack )
         : name(name), level(level), health(health), attack(attack) {}
 
-    virtual void attackEnemy(Character& enemy) {
+   void attackEnemy(Character& enemy) {
         std::cout << name << " атакует " << enemy.name << "!" << std::endl;
         // Логика атаки персонажа на врага
     }
 
-    virtual void useSkill() {
-        std::cout << name << " использует навык!" << std::endl;
+   void usefly() {
+        std::cout << name << " Использует полет" << std::endl;
         // Логика использования навыка персонажа
     }
-
-    friend std::ostream& operator<<(std::ostream& os, const Character& character) {
-        os << "Имя: " << character.name << std::endl;
-        os << "Уровень: " << character.level << std::endl;
-        os << "Здоровье: " << character.health << std::endl;
-        os << "Атака: " << character.attack << std::endl;
-        return os;
+   void skill() {
+       std::cout << name << " Использует полет" << std::endl;
+       // Логика использования навыка персонажа
+   }
+    friend std::ostream& operator<<(std::ostream& output, const Play_Character& character) {
+        output << "Регион: " << character.region << std::endl;
+        output << "Имя: " << character.name << std::endl;
+        output << "Уровень: " << character.level << std::endl;
+        output << "Здоровье: " << character.health << std::endl;
+        output << "Атака: " << character.attack << std::endl;
+        return output;
     }
     
     void setHeal(std::function<void()> healFunc) {
@@ -45,24 +49,18 @@ public:
 
     void performHeal() {
         if (heal) {
-            heal(); // Вызов лямбда-выражения лечения
+            heal();
         }
     }
 
-
-
-
-
-
-
 };
 
-class PlayerCharacter : public Character {
+class PlayerCharacter : public Play_Character {
 private:
     int experience;
 public:
     PlayerCharacter(const std::string& name, int health, int attack, int defense, int experience)
-        : Character(name, health, attack, defense), experience(experience) {}
+        : Play_Character(name, health, attack, defense), experience(experience) {}
 
     int getExperience() const {
         return experience;
@@ -79,10 +77,14 @@ public:
         health += 20;
         experience = 0; // Обнуляем опыт после повышения уровня
     }
-
+    //Использование навыка усилеие
+    void ULt() {
+        attack += 100;
+        health -= 25;
+     }
     void specialAbility() {
         // Используем особый навык персонажа
-        // Например, наносим урон всем врагам на поле боя
+я
     }
 };
 
@@ -91,20 +93,20 @@ public:
 
 
 // Класс-декоратор для персонажей
-class CharacterDecorator : public Character {
+class CharacterDecorator : public Play_Character {
 protected:
-    Character& character;
+    Play_Character& character;
 
 public:
-    CharacterDecorator(Character& character)
-        : Character(character.name, character.level, character.health, character.attack), character(character) {}
+    CharacterDecorator(Play_Character& character)
+        : Play_Character(character.name, character.level, character.health, character.attack), character(character) {}
 
-    void attackEnemy(Character& enemy) override {
+    void attackEnemy(Play_Character& enemy) {
         character.attackEnemy(enemy);
     }
 
-    void useSkill() override {
-        character.useSkill();
+    void skill() override {
+        character.usefly();
     }
 };
 
@@ -114,12 +116,12 @@ private:
     int attackBoost;
 
 public:
-    AttackBoostDecorator(Character& character, int attackBoost)
+    AttackBoostDecorator(Play_Character& character, int attackBoost)
         : CharacterDecorator(character), attackBoost(attackBoost) {
         this->attack += attackBoost;
     }
 
-    void attackEnemy(Character& enemy) override {
+    void attackEnemy(Play_Character& enemy) override {
         std::cout << name << " атакует " << enemy.name << " с усиленной атакой!" << std::endl;
         character.attackEnemy(enemy);
     }
@@ -128,36 +130,38 @@ public:
 // Класс-стратегия для выбора навыка персонажа
 class SkillStrategy {
 public:
-    virtual void useSkill(Character& character) = 0;
+    skill(Play_Character& character) {
+        character = 0;
+    }
 };
 
 // Конкретная стратегия для навыка "Огненный шар"
 class FireballSkillStrategy : public SkillStrategy {
 public:
-    void useSkill(Character& character) override {
+    void skill(Play_Character& character)  {
         std::cout << character.name << " использует навык Огненный шар!" << std::endl;
-        // Логика использования навыка "Огненный шар"
+
     }
 };
 
 // Конкретная стратегия для навыка "Лечение"
 class HealingSkillStrategy : public SkillStrategy {
 public:
-    void useSkill(Character& character) override {
+    void skill(Play_Character& character)  {
         std::cout << character.name << " использует навык Лечение!" << std::endl;
         // Логика использования навыка "Лечение"
     }
 };
 
 int main() {
-    Character player("Сяо", 1, 100, 10);
-    Character enemy("Хиличурл", 1, 100, 10);
+    Play_Character player("Сяо", 1, 100, 10);
+    Play_Character enemy("Хиличурл", 1, 100, 10);
 
     std::cout << player << std::endl;
     std::cout << enemy << std::endl;
 
     player.attackEnemy(enemy);
-    player.useSkill();
+    player.skill();
 
     AttackBoostDecorator boostedPlayer(player, 5);
     boostedPlayer.attackEnemy(enemy);
@@ -165,11 +169,11 @@ int main() {
     FireballSkillStrategy fireballStrategy;
     HealingSkillStrategy healingStrategy;
 
-    player.useSkill();
-    fireballStrategy.useSkill(player);
+    player.skill();
+    fireballStrategy.skill(player);
 
-    player.useSkill();
-    healingStrategy.useSkill(player);
+    player.skill();
+    healingStrategy.skill(player);
 
     return 0;
 
@@ -185,7 +189,7 @@ int main() {
         std::cout << i << std::endl;
 
 
-    Character player("barbara", 100, 20, 10);
+    Play_Character player("barbara", 100, 20, 10);
     player.setHeal([]() {
         std::cout << "Player heals themselves!" << std::endl;
         });
