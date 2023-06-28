@@ -1,14 +1,8 @@
-﻿#include "characters.h"
+//﻿#include "characters.h"
 #include <iostream>
-#include <ctime>
 #include "list.h"
 #include <vector>
-#include <ranges>
 #include <algorithm>
-#include <string>
-
-// Базовый класс "Персонаж"
-#include <iostream>
 #include <string>
 
 // Базовый класс персонажа
