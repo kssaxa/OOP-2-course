@@ -154,7 +154,7 @@ public:
 };
 
 int main() {
-    Play_Character player("Сяо", 1, 100, 10);
+    Play_Character player("Li UE","Сяо", 1, 100, 10);
     Play_Character enemy("Хиличурл", 1, 100, 10);
 
     std::cout << player << std::endl;
@@ -189,7 +189,7 @@ int main() {
         std::cout << i << std::endl;
 
 
-    Play_Character player("barbara", 100, 20, 10);
+    Play_Character player("Mondsshtat","barbara", 100, 20, 10);
     player.setHeal([]() {
         std::cout << "Player heals themselves!" << std::endl;
         });
